@@ -1,10 +1,8 @@
 const Path = require('path'),
-  goFfmpeg = require('./utils/down-m3u8'),
+  goFfmpeg = require('./down-m3u8'),
   { to } = require('await-to-js'),
-  { accessAsync, statAsync, mkdirAsync } = require('./utils/node-utils'),
-  config = require('./config');
-
-(async () => {
+  { accessAsync, statAsync, mkdirAsync } = require('./utils/node-utils');
+module.exports = async config => {
   // 检查输出目录是否存在
   const [statOutputErr] = await to(statAsync(config.output));
   // 创建输出目录
@@ -21,4 +19,4 @@ const Path = require('path'),
   }
 
   await goFfmpeg(config.url, output);
-})();
+};
